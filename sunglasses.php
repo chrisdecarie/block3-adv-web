@@ -86,3 +86,5 @@ $sunglasses1->displayInfo();
 // Clean the sunglasses
 $sunglasses1->clean();
 
+?>
+
