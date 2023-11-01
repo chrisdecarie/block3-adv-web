@@ -1,13 +1,10 @@
-<?php
-
-ini_set('display_errors', 1);
-
 class Sunglasses {
     // Object properties
     private $brand;
     private $model;
     private $color;
     private $price;
+    private $folded;
 
     // Constructor to initialize the object properties
     public function __construct($brand, $model, $color, $price) {
@@ -15,6 +12,22 @@ class Sunglasses {
         $this->model = $model;
         $this->color = $color;
         $this->price = $price;
+        $this->folded = false; // Sunglasses start as unfolded
+    }
+
+    // Method to fold the sunglasses
+    public function fold() {
+        $this->folded = true;
+    }
+
+    // Method to unfold the sunglasses
+    public function unfold() {
+        $this->folded = false;
+    }
+
+    // Method to clean the sunglasses
+    public function clean() {
+        echo "Cleaning the sunglasses...\n";
     }
 
     // Method to get the brand of the sunglasses
@@ -37,6 +50,11 @@ class Sunglasses {
         return $this->price;
     }
 
+    // Method to check if the sunglasses are folded
+    public function isFolded() {
+        return $this->folded;
+    }
+
     // Method to display information about the sunglasses
     public function displayInfo() {
         echo "Sunglasses Information: \n";
@@ -44,6 +62,7 @@ class Sunglasses {
         echo "Model: " . $this->getModel() . "\n";
         echo "Color: " . $this->getColor() . "\n";
         echo "Price: $" . $this->getPrice() . "\n";
+        echo "Status: " . ($this->isFolded() ? "Folded" : "Unfolded") . "\n";
     }
 }
 
@@ -52,3 +71,15 @@ $sunglasses1 = new Sunglasses("Ray-Ban", "Aviator", "Black", 150.99);
 
 // Display information about the sunglasses
 $sunglasses1->displayInfo();
+
+// Fold the sunglasses
+$sunglasses1->fold();
+$sunglasses1->displayInfo();
+
+// Unfold the sunglasses
+$sunglasses1->unfold();
+$sunglasses1->displayInfo();
+
+// Clean the sunglasses
+$sunglasses1->clean();
+
