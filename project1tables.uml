@@ -1,1 +1,71 @@
 
+@startuml
+
+abstract class PetProduct {
+  - name
+  - type
+  - category
+  - price
+  - tax
+  - brand
+  - cost
+  - profitMargin
+
+  + __construct()
+  + getName()
+  + getType()
+  + getCategory()
+  + getPrice()
+  + getTax()
+  + getBrand()
+  + getCost()
+  + getProfitMargin()
+  abstract calculatePrice()
+  abstract calculateTax()
+}
+
+class PetFood extends PetProduct {
+  - catFood
+  - dogFood
+  - expiration
+
+  + __construct()
+  + getExpiration()
+  + calculateExpiration()
+  + abstract calculatePrice()
+  + calculateTax()
+  + calculateProfit()
+  + addNumberofItem()
+  + calculateShelfTime()
+}
+
+class PetToy extends PetProduct {
+  - catToys
+  - dogToys
+
+  + __construct()
+  + abstract calculatePrice()
+  + calculateTax()
+  + calculateProfit()
+  + addNumberofItem()
+  + calculateShelfTime()
+}
+
+@enduml
+
+@startuml
+
+class Inventory {
+  - ProductId
+  - ProductType
+  + __construct()
+  + getProductId()
+  + getProductType()
+  +getProductCategory
+  +getNumberofItem
+  + updateInventory()
+  +calculateAvaregeShelfTime
+  +calculateCost()
+}
+@enduml
+
