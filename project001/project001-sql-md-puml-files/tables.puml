@@ -1,0 +1,53 @@
+
+@startuml
+Type --|> Product
+Category --|> Product
+Brand --|> Product
+PetFoodExpiration --|> Product
+PetToySize --|> Product
+ProductPrice --|> Product
+
+abstract class Product {
+  -productID
+  -name
+  -typeID
+  -categoryID
+  -brandID
+  -pricingID
+}
+
+class Type {
+  typeID
+  type
+}
+
+class Category {
+  -categoryID
+  -category
+}
+
+class Brand {
+  -brandID
+  -name
+}
+
+class PetFoodExpiration {
+  -expirationID
+  -productID
+  -expirationdate
+}
+
+class PetToySize {
+  -sizeID
+  -prouductID
+  -size
+}
+
+class ProductPrice {
+  -pricingID
+  -productID
+  -price
+}
+
+
+@enduml
