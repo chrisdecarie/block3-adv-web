@@ -1,40 +1,40 @@
 
 <?php
-//root/models/product-category-model.php
-class ProductCategoryModel {
+//root/models/pizza-orders-model.php
+class PizzaOrdersModel {
     private $db;
 
     public function __construct($db) {
         $this->db = $db;
     }
 
-    public function insertCategory($category) {
+    public function insertOrders($orders) {
         // Check if the category already exists
-        $existingCategories = $this->getAllCategories();
-        foreach ($existingCategories as $existingCategory) {
-            if (strcasecmp($existingCategory['category'], $category) === 0) {
-                return false; // Category already exists, do not insert
+        $existingOrders = $this->getAllOrders();
+        foreach ($existingOrders as $existingOrders) {
+            if (strcasecmp($existingOrders['orders'], $orders) === 0) {
+                return false; // Orders already exists, do not insert
             }
         }
 
-        $query = "INSERT INTO productCategory (`category`) VALUES ('$category')";
+        $query = "INSERT INTO pizzaOrders (`orders`) VALUES ('$orders')";
         return mysqli_query($this->db, $query);
     }
 
-    public function getAllCategories() {
-        $query = "SELECT * FROM productCategory ORDER BY `category` ASC";
+    public function getAllOrders() {
+        $query = "SELECT * FROM pizzaOrders ORDER BY `orders` ASC";
         $result = mysqli_query($this->db, $query);
 
-        $categories = [];
+        $orders = [];
         while ($row = mysqli_fetch_assoc($result)) {
-            $categories[] = $row;
+            $orders[] = $row;
         }
 
-        return $categories;
+        return $orders;
     }
 
-    public function deleteCategory($categoryID) {
-        $query = "DELETE FROM productCategory WHERE categoryID = $categoryID";
+    public function deleteOrders($ordersID) {
+        $query = "DELETE FROM pizzaOrders WHERE ordersID = $ordersID";
         return mysqli_query($this->db, $query);
     }
 }
