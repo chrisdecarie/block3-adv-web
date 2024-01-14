@@ -1,0 +1,35 @@
+
+@startuml
+Pizza --|> Pizza
+Ingredients --|> Pizza
+Size --|> Pizza
+Orders --|> Pizza
+
+abstract class Product {
+  -pizzatID
+  -ingredientsID
+  -sizeID
+  -ordersID
+}
+
+class Pizza {
+  pizzaID
+  pizza
+}
+
+class Ingredients {
+  -ingredientsID
+  -ingredients
+}
+
+class Size {
+  -sizeID
+  -size
+}
+
+class Orders {
+  -ordersID
+  -orders
+}
+
+@enduml
