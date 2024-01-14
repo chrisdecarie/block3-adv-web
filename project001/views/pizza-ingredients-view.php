@@ -1,32 +1,32 @@
 <?php
-//root/views/product-brand-view.php
-class ProductBrandView {
-    public function displayBrands($brands, $brandSuccessMessage, $brandErrorMessage) {
+//root/views/pizza-ingredients-view.php
+class PizzaIngredientsView {
+    public function displayIngredients($ingredients, $ingredientsSuccessMessage, $ingredientsErrorMessage) {
 
-        echo "<main class='brand'>";
+        echo "<main class='ingredients'>";
         echo "<section>";
         echo " <article>";
 
-        echo "<h2>Product Brands</h2>";
+        echo "<h2>Pizza Ingredients</h2>";
 
         // Display success or error message
-        if ($brandSuccessMessage) {
-            echo "<h3 class='success'>$brandSuccessMessage</h3>";
-        } elseif ($brandErrorMessage) {
-            echo "<h3 class='error'>$brandErrorMessage</h3>";
+        if ($ingredientsSuccessMessage) {
+            echo "<h3 class='success'>$ingredientsSuccessMessage</h3>";
+        } elseif ($ingredientsErrorMessage) {
+            echo "<h3 class='error'>$ingredientsErrorMessage</h3>";
         }
 
-        // Display form for adding a new brand
+        // Display form for adding a new ingredient
         echo "
         <div class='form-wrap'>
             <form class='form-1' method='POST' action='index.php'>
            
-                <label class='form-label' for='newBrand'>New Brand</label>
+                <label class='form-label' for='newIngredients'>New Ingredients</label>
                
-                <input class='form-input' type='text' id='newBrand' name='newBrand' placeholder=' Enter new brand' required>
+                <input class='form-input' type='text' id='newIngredients' name='newIngredients' placeholder=' Enter new ingredients' required>
                 
                
-                <button type='submit'>Add Brand</button>
+                <button type='submit'>Add Ingredients</button>
             </form>
             </div>
             <br>
@@ -34,11 +34,11 @@ class ProductBrandView {
 
         ";
 
-        // Display existing brands
+        // Display existing ingredients
         echo "<ul class='list'>";
-        foreach ($brands as $brand) {
+        foreach ($ingredients as $ingredient) {
             echo "<li class='list-item'>
-                {$brand['brand']} - <a href='index.php?action=delete&id={$brand['brandID']}'>Delete</a>
+                {$ingredients['ingredients']} - <a href='index.php?action=delete&id={$ingredients['ingredientsID']}'>Delete</a>
             </li>";
         }
         echo "</ul>";
