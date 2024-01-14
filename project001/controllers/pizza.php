@@ -1,33 +1,33 @@
 <?php
-//root/controllers/product-controller.php
+//root/controllers/pizza-controller.php
 
-require_once 'models/product-model.php';
-require_once 'views/product-view.php';
+require_once 'models/pizza-model.php';
+require_once 'views/pizza-view.php';
 
-class ProductController {
+class PizzaController {
     private $model;
     private $view;
 
-    public function __construct($productModel, $productView) {
-        $this->model = $productModel;
-        $this->view = $productView;
+    public function __construct($pizzaModel, $pizzaView) {
+        $this->model = $pizzaModel;
+        $this->view = $pizzaView;
     }
 
-    public function handleProductRequest() {
+    public function handlePizzaRequest() {
         $successMessage = "";
         $errorMessage = "";
 
         // Form submission
         if ($_SERVER['REQUEST_METHOD'] === 'POST') {
-            $categoryID = $_POST['categoryID'];
-            $brandID = $_POST['brandID'];
-            $productName = $_POST['productName'];
-            $typeID = $_POST['typeID'];
+            $ordersID = $_POST['ordersID'];
+            $ingredientsID = $_POST['ingredientsID'];
+            $pizzaName = $_POST['pizzaName'];
+            $sizeID = $_POST['sizeID'];
 
-            $existingProduct = $this->model->getProductByName($productName);
+            $existingPizza = $this->model->getPizzaByName($pizzaName);
 
-            if (!$existingProduct) {
-                $result = $this->model->addProduct($categoryID, $brandID, $productName, $typeID);
+            if (!$existingPizza) {
+                $result = $this->model->addPizza($ingredientsID, $ordersID, $pizzaID, $sizeID);
 
                 if ($result === true) {
                     $successMessage = "Item added successfully!";
@@ -39,11 +39,11 @@ class ProductController {
             }
         }
 
-        // Handle product deletion
+        // Handle pizza deletion
         if ($_SERVER['REQUEST_METHOD'] === 'GET' && isset($_GET['action']) && $_GET['action'] === 'delete' && isset($_GET['id'])) {
-            $productID = $_GET['id'];
+            $pizzaID = $_GET['id'];
 
-            $result = $this->model->deleteProduct($productID);
+            $result = $this->model->deletePizza($pizzaID);
 
             if ($result) {
                 $successMessage = "Item deleted successfully.";
@@ -52,13 +52,13 @@ class ProductController {
             }
         }
 
-        // Display products
-        $products = $this->model->getAllProducts();
-        $categories = $this->model->getAllCategories();
-        $brands = $this->model->getAllBrands();
-        $types = $this->model->getAllTypes();
+        // Display pizzas
+        $pizza = $this->model->getAllPizza();
+        $orders = $this->model->getAllOrders();
+        $ingredients = $this->model->getAllIngredients();
+        $sizes = $this->model->getAllSizes();
 
-        $this->view->displayProducts($products, $categories, $brands, $types, $successMessage, $errorMessage);
+        $this->view->displayPizza($pizza $orders, $ingredients, $sizes, $successMessage, $errorMessage);
     }
 }
 
