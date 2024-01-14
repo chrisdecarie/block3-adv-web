@@ -1,48 +1,48 @@
 <?php
-//root/controllers/product-category-controller.php
+//root/controllers/pizza-orders-controller.php
 require_once 'connect/dbconnect.php';
-require_once 'models/product-category-model.php';
-require_once 'views/product-category-view.php';
+require_once 'models/pizza-orders-model.php';
+require_once 'views/pizza-orders-view.php';
 
-class ProductCategoryController {
+class PizzaOrdersController {
     private $model;
     private $view;
 
-    public function __construct($productCategoryModel, $productCategoryView) {
-        $this->model = $productCategoryModel;
-        $this->view = $productCategoryView;
+    public function __construct($pizzaOrdersModel, $pizzaOrdersView) {
+        $this->model = $pizzaOrdersModel;
+        $this->view = $pizzaOrdersView;
     }
 
-    public function handleCategoryRequest(){
+    public function handleOrdersRequest(){
         // Form submission
         if ($_SERVER['REQUEST_METHOD'] === 'POST') {
-            $newCategory = isset($_POST['newCategory']) ? $_POST['newCategory'] : '';
+            $newOrders = isset($_POST['newOrders']) ? $_POST['newOrders'] : '';
 
-            if (!empty($newCategory)) {
-                $result = $this->model->insertCategory($newCategory);
+            if (!empty($newOrders)) {
+                $result = $this->model->insertOrders($newOrders);
 
                 if ($result === false) {
-                    $categoryAddErrorMessage = "Item already exists. Please choose a different category.";
+                    $ordersAddErrorMessage = "Item already exists. Please choose a different orders.";
                 } elseif ($result === null) {
-                    $categoryAddErrorMessage = "Failed to add item. Please check your input.";
+                    $ordersAddErrorMessage = "Failed to add item. Please check your input.";
                 }
             }
         }
 
-        // Handle category deletion
+        // Handle orders deletion
         if ($_SERVER['REQUEST_METHOD'] === 'GET' && isset($_GET['action']) && $_GET['action'] === 'delete' && isset($_GET['id'])) {
-            $categoryID = $_GET['id'];
+            $ordersID = $_GET['id'];
 
-            $result = $this->model->deleteCategory($categoryID);
+            $result = $this->model->deleteOrders($ordersID);
 
             if ($result === null) {
-                $categoryDeleteErrorMessage = "Failed to delete item.";
+                $ordersDeleteErrorMessage = "Failed to delete item.";
             }
         }
 
-        // Display product categories without success and error messages
-        $categories = $this->model->getAllCategories();
-        $this->view->displayCategories($categories, null, null);
+        // Display orders without success and error messages
+        $orders = $this->model->getAllOrders();
+        $this->view->displayOrders($orders, null, null);
     }
 }
 ?>
