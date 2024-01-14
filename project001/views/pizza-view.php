@@ -1,56 +1,56 @@
 <?php
-// root folder> views folder> product-view.php 
+// root folder> views folder> pizza-view.php 
 
-class ProductView {
-    public function displayProducts($products, $categories, $brands, $types, $productSuccessMessage, $productErrorMessage) {
+class PizzaView {
+    public function displayProducts($pizza, $orders, $ingredients, $sizes, $pizzaSuccessMessage, $pizzatErrorMessage) {
         echo "<main>";
         echo "<div class='list-wrap'>";
     
         // Display the form
-        $this->displayProductForm($categories, $brands, $types);
+        $this->displayPizzaForm($orders, $ingredients, $sizes);
     
-        // Display products
-        echo "<h2>Products</h2>";
-        echo "<ul class='product-list'>";
-        foreach ($products as $product) {
-            echo "<li class='list-item'>{$product['productName']} - {$product['type']} - {$product['category']} - {$product['brand']} [<a href='./index.php?product&action=delete&id={$product['productID']}'>Delete</a>]</li>";
+        // Display pizzas
+        echo "<h2>Pizzas</h2>";
+        echo "<ul class='pizza-list'>";
+        foreach ($pizza as $pizza) {
+            echo "<li class='list-item'>{$pizza['pizzaName']} - {$pizza['size']} - {$pizza['orders']} - {$pizza['ingredients']} [<a href='./index.php?pizza&action=delete&id={$pizza['pizzaID']}'>Delete</a>]</li>";
         }
         echo "</ul>";
 
         // Display delete success or error messages
-        $this->displayDeleteProductSuccessMessage($productSuccessMessage);
-        $this->displayDeleteProductErrorMessage($productErrorMessage);
+        $this->displayDeletePizzaSuccessMessage($pizzaSuccessMessage);
+        $this->displayDeletePizzaErrorMessage($pizzaErrorMessage);
 
         echo "</div>";
         echo "</main>";
     }
 
-    public function displayProductForm($categories, $brands, $types) {
+    public function displayPizzaForm($orders, $ingredients, $sizes) {
         echo "<main>";
-        echo "<h2>Products</h2>
+        echo "<h2>Pizzas</h2>
             <div class='form-wrap'>
                 
-                <form class='form-2' method='post' action='./index.php?product'>
+                <form class='form-2' method='post' action='./index.php?pizza'>
                 
                     <div class='form-group'>
-                        <label class='form-label' for='categoryID'>Category </label>
-                        <select class='form-input' id='categoryID' name='categoryID' required>
-                            <option value='' disabled selected>Select Category </option>";
-                            foreach ($categories as $category) {
-                                echo "<option value='{$category['categoryID']}'>{$category['category']}</option>";
+                        <label class='form-label' for='ordersID'>Orders </label>
+                        <select class='form-input' id='ordersID' name='ordersID' required>
+                            <option value='' disabled selected>Select Orders </option>";
+                            foreach ($orders as $order) {
+                                echo "<option value='{$orders['ordersID']}'>{$orders['orders']}</option>";
                             }
             echo "
                         </select>
                     </div>";
                     
-            // Add Type dropdown
+            // Add Size dropdown
             echo "
                     <div class='form-group'>
-                        <label class='form-label' for='typeID'>Type </label>
-                        <select class='form-input' id='typeID' name='typeID' required>
-                            <option value='' disabled selected>Select Type</option>";
-                            foreach ($types as $type) {
-                                echo "<option value='{$type['typeID']}'>{$type['type']}</option>";
+                        <label class='form-label' for='sizeID'>Type </label>
+                        <select class='form-input' id='sizeID' name='sizeID' required>
+                            <option value='' disabled selected>Select Size</option>";
+                            foreach ($sizes as $size) {
+                                echo "<option value='{$size['sizeID']}'>{$size['size']}</option>";
                             }
             echo "
                         </select>
@@ -58,11 +58,11 @@ class ProductView {
 
             echo "
                     <div class='form-group'>
-                        <label class='form-label' for='brandID'>Brand </label>
-                        <select class='form-input' id='brandID' name='brandID' required>
-                            <option value='' disabled selected>Select Brand</option>";
-                            foreach ($brands as $brand) {
-                                echo "<option value='{$brand['brandID']}'>{$brand['brand']}</option>";
+                        <label class='form-label' for='ingredientsID'>Ingredients </label>
+                        <select class='form-input' id='ingredientsID' name='ingredientsID' required>
+                            <option value='' disabled selected>Select Ingredients</option>";
+                            foreach ($ingredients as $ingredient) {
+                                echo "<option value='{$ingredient['ingredientID']}'>{$ingredient['ingredient']}</option>";
                             }
                 echo "
                         </select>
@@ -70,27 +70,27 @@ class ProductView {
 
             echo "
                     <div class='form-group'>
-                        <label class='form-label' for='productName'>Product Name</label>
-                        <input class='form-input' id='productName' type='text' name='productName' placeholder='Enter product name' required>
+                        <label class='form-label' for='pizzaName'>Pizza Name</label>
+                        <input class='form-input' id='pizzaName' type='text' name='pizzaName' placeholder='Enter pizza name' required>
                     </div>";
 
             echo "
-                    <button type='submit'>Add Product</button>
+                    <button type='submit'>Add Pizza</button>
                 </form>
             </div>
         ";
         echo "</main>";
     }
 
-    public function displayDeleteProductSuccessMessage($productSuccessMessage) {
-        if ($productSuccessMessage) {
-            echo "<h3 class='success'>$productSuccessMessage</h3>";
+    public function displayDeletePizzaSuccessMessage($pizzaSuccessMessage) {
+        if ($pizzaSuccessMessage) {
+            echo "<h3 class='success'>$pizzaSuccessMessage</h3>";
         }
     }
 
-    public function displayDeleteProductErrorMessage($productErrorMessage) {
-        if ($productErrorMessage) {
-            echo "<h3 class='error'>$productErrorMessage</h3>";
+    public function displayDeletePizzaErrorMessage($pizzaErrorMessage) {
+        if ($pizzaErrorMessage) {
+            echo "<h3 class='error'>$pizzaErrorMessage</h3>";
         }
     }
 }
