@@ -1,54 +1,54 @@
 <?php
-//root/controllers/product-brand-controller.php
+//root/controllers/pizza-ingredients-controller.php
 require_once 'connect/dbconnect.php';
-require_once 'models/product-brand-model.php';
-require_once 'views/product-brand-view.php';
-class ProductBrandController {
+require_once 'models/pizza-ingredients-model.php';
+require_once 'views/pizza-ingredients-view.php';
+class PizzaIngredientsController {
     private $model;
     private $view;
 
-    public function __construct($productBrandModel, $productBrandView) { 
-        $this->model = $productBrandModel;
-        $this->view = $productBrandView;
+    public function __construct($pizzaIngredientsModel, $pizzaIngredientsView) { 
+        $this->model = $pizzaIngredientsModel;
+        $this->view = $pizzaIngredientsView;
     }
 
-    public function handleBrandRequest(){
-        $brandSuccessMessage = "";
-        $brandErrorMessage = "";
+    public function handleIngredientsRequest(){
+        $ingredientsSuccessMessage = "";
+        $ingredientsErrorMessage = "";
 
         // Form submission
         if ($_SERVER['REQUEST_METHOD'] === 'POST') {
-            $newBrand = isset($_POST['newBrand']) ? $_POST['newBrand'] : '';
+            $newIngredients = isset($_POST['newIngredients']) ? $_POST['newIngredients'] : '';
 
-            if (!empty($newBrand)) {
-                $result = $this->model->insertBrand($newBrand);
+            if (!empty($newIngredients)) {
+                $result = $this->model->insertIngredients($newIngredients);
 
                 if ($result === true) {
-                    $brandSuccessMessage = "Item added successfully!";
+                    $ingredientsSuccessMessage = "Item added successfully!";
                 } elseif ($result === false) {
-                    $brandErrorMessage = "Item already exists. Please choose a different item.";
+                    $ingredientsErrorMessage = "Item already exists. Please choose a different item.";
                 } else {
-                    $brandErrorMessage = "Failed to add item. Please check your input.";
+                    $ingredientsErrorMessage = "Failed to add item. Please check your input.";
                 }
             }
         }
 
-        // Handle brand deletion
+        // Handle ingredients deletion
         if ($_SERVER['REQUEST_METHOD'] === 'GET' && isset($_GET['action']) && $_GET['action'] === 'delete' && isset($_GET['id'])) {
-            $brandID = $_GET['id'];
+            $ingredientsID = $_GET['id'];
 
-            $result = $this->model->deleteBrand($brandID);
+            $result = $this->model->deleteIngredients($ingredientsID);
 
             if ($result) {
-                $brandSuccessMessage = "Item deleted successfully.";
+                $ingredientsSuccessMessage = "Item deleted successfully.";
             } else {
-                $brandErrorMessage = "Failed to delete brand.";
+                $ingredientsErrorMessage = "Failed to delete ingredients.";
             }
         }
 
-        // Display brands
-        $brands = $this->model->getAllBrands();
-        $this->view->displayBrands($brands, $brandSuccessMessage, $brandErrorMessage);
+        // Display ingredients
+        $ingredients = $this->model->getAllIngredients();
+        $this->view->displayIngredients($ingredients, $ingredientsSuccessMessage, $ingredientsErrorMessage);
     }
 }
 
