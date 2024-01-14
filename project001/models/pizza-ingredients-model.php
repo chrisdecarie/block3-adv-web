@@ -1,39 +1,39 @@
 <?php
-//root/models/product-brand-model.php
-class ProductBrandModel {
+//root/models/pizza-ingredients-model.php
+class PizzaIngredientsModel {
     private $db;
 
     public function __construct($db) {
         $this->db = $db;
     }
 
-    public function insertBrand($brand) {
-        // Check if the brand already exists
-        $existingBrands = $this->getAllBrands();
-        foreach ($existingBrands as $existingBrand) {
-            if (strcasecmp($existingBrand['brand'], $brand) === 0) {
-                return false; // Brand already exists, do not insert
+    public function insertIngredients($ingredients) {
+        // Check if the ingredients already exists
+        $existingIngredients = $this->getAllIngredients();
+        foreach ($existingIngredients as $existingIngredients) {
+            if (strcasecmp($existingIngredients['ingredients'], $ingredients) === 0) {
+                return false; // Ingredients already exists, do not insert
             }
         }
 
-        $query = "INSERT INTO productBrand (`brand`) VALUES ('$brand')";
+        $query = "INSERT INTO pizzaIngredients (`ingredients`) VALUES ('$ingredients')";
         return mysqli_query($this->db, $query);
     }
 
-    public function getAllBrands() {
-        $query = "SELECT * FROM productBrand ORDER BY `brand` ASC";
+    public function getAllIngredients() {
+        $query = "SELECT * FROM pizzaIngredients ORDER BY `ingredients` ASC";
         $result = mysqli_query($this->db, $query);
 
-        $brands = [];
+        $ingredients = [];
         while ($row = mysqli_fetch_assoc($result)) {
-            $brands[] = $row;
+            $ingredients[] = $row;
         }
 
-        return $brands;
+        return $ingredients;
     }
 
-    public function deleteBrand($brandID) {
-        $query = "DELETE FROM productBrand WHERE brandID = $brandID";
+    public function deleteIngredients($ingredientsID) {
+        $query = "DELETE FROM productIngredients WHERE ingredientsID = $ingredientsID";
         return mysqli_query($this->db, $query);
     }
     
