@@ -1,50 +1,35 @@
 
 @startuml
-Type --|> Product
-Category --|> Product
-Brand --|> Product
-PetFoodExpiration --|> Product
-PetToySize --|> Product
-ProductPrice --|> Product
+Ingredients --|> Pizza
+Size --|> Pizza
+Orders --|> Pizza
+
 
 abstract class Product {
-  -productID
-  -name
-  -typeID
-  -categoryID
-  -brandID
-  -pricingID
+  -pizzaID
+  -ingredientsID
+  -SizeID
+  -OrdersID
 }
 
-class Type {
-  typeID
-  type
+class Pizza {
+  pizzaID
+  pizza
 }
 
-class Category {
-  -categoryID
-  -category
+class Ingredients {
+  -ingredientsID
+  -ingredients
 }
 
-class Brand {
-  -brandID
-  -name
-}
-
-class PetFoodExpiration {
-  -expirationID
-  -productID
-  -expirationdate
-}
-
-class PetToySize {
+class Size {
   -sizeID
-  -prouductID
   -size
 }
 
-class ProductPrice {
-  -pricingID
+class Orders {
+  -ordersID
   -productID
-  -price
+  -orders
 }
+
