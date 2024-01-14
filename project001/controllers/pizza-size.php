@@ -1,11 +1,10 @@
 <?php
-//root/controllers/product-type-controller.php
-// root/controllers/product-type-controller.php
+//root/controllers/pizza-size-controller.php
 require_once 'connect/dbconnect.php';
-require_once 'models/product-type-model.php';
-require_once 'views/product-type-view.php';
+require_once 'models/pizza-size-model.php';
+require_once 'views/pizza-size-view.php';
 
-class ProductTypeController {
+class PizzaSizeController {
     private $model;
     private $view;
 
@@ -23,7 +22,7 @@ class ProductTypeController {
             $newType = isset($_POST['newType']) ? $_POST['newType'] : '';
 
             if (!empty($newType)) {
-                $result = $this->model->insertProductType($newType);
+                $result = $this->model->insertPizzaSize($newType);
 
                 if ($result === true) {
                     $typeSuccessMessage = "Item added successfully!";
@@ -35,11 +34,11 @@ class ProductTypeController {
             }
         }
 
-        // Handle type deletion
+        // Handle size deletion
         if ($_SERVER['REQUEST_METHOD'] === 'GET' && isset($_GET['action']) && $_GET['action'] === 'delete' && isset($_GET['id'])) {
-            $typeID = $_GET['id'];
+            $sizeID = $_GET['id'];
 
-            $result = $this->model->deleteProductType($typeID);
+            $result = $this->model->deletePizzaSize($typeID);
 
             if ($result) {
                 $typeSuccessMessage = "Item deleted successfully.";
@@ -48,9 +47,9 @@ class ProductTypeController {
             }
         }
 
-        // Display product types
-        $types = $this->model->getAllProductTypes();
-        $this->view->displayProductTypes($types, $typeSuccessMessage, $typeErrorMessage);
+        // Display pizza sizes
+        $types = $this->model->getAllPizzaSizes();
+        $this->view->displayPizzaSizes($sizes, $sizeSuccessMessage, $sizeErrorMessage);
     }
 }
 
