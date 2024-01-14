@@ -1,40 +1,40 @@
 <?php
-//root/models/product-type-model.php
-//root/models/product-type-model.php
-class ProductTypeModel {
+//root/models/pizza-size-model.php
+//root/models/pizza-size-model.php
+class PizzaSizeModel {
     private $db;
 
     public function __construct($db) {
         $this->db = $db;
     }
 
-    public function insertProductType($type) {
-        // Check if the type already exists
-        $existingTypes = $this->getAllProductTypes();
-        foreach ($existingTypes as $existingType) {
-            if (strcasecmp($existingType['type'], $type) === 0) {
+    public function insertPizzaSize($size) {
+        // Check if the size already exists
+        $existingSizes = $this->getAllPizzaSizes();
+        foreach ($existingSizes as $existingSize) {
+            if (strcasecmp($existingSize['size'], $size) === 0) {
                 return false; // Type already exists, do not insert
             }
         }
 
-        $query = "INSERT INTO productType (`type`) VALUES ('$type')";
+        $query = "INSERT INTO pizzaSize (`size`) VALUES ('$size')";
         return mysqli_query($this->db, $query);
     }
 
-    public function getAllProductTypes() {
-        $query = "SELECT * FROM productType ORDER BY `type` ASC";
+    public function getAllPizzaSizes() {
+        $query = "SELECT * FROM pizzaSize ORDER BY `size` ASC";
         $result = mysqli_query($this->db, $query);
 
-        $types = [];
+        $sizes = [];
         while ($row = mysqli_fetch_assoc($result)) {
-            $types[] = $row;
+            $sizes[] = $row;
         }
 
-        return $types;
+        return $sizes;
     }
 
-    public function deleteProductType($typeID) {
-        $query = "DELETE FROM productType WHERE typeID = $typeID";
+    public function deletePizzaSize($sizeID) {
+        $query = "DELETE FROM pizzaSize WHERE sizeID = $sizeID";
         return mysqli_query($this->db, $query);
     }
 }
