@@ -1,26 +1,26 @@
 <?php
-// root/models/product-model.php
-class ProductModel {
+// root/models/pizza-model.php
+class PizzaModel {
     private $db;
 
     public function __construct($db) {
         $this->db = $db;
     }
 
-    public function addProduct($categoryID, $brandID, $productName, $typeID) {
-        $query = "INSERT INTO petProduct (categoryID, brandID, productName, typeID)
-                  VALUES ('$categoryID', '$brandID', '$productName', '$typeID')";
+    public function addPizza($ordersID, $ingredientsID, $pizzaName, $sizeID) {
+        $query = "INSERT INTO pizza (ordersID, ingredientsID, pizzaID, sizeID)
+                  VALUES ('$ordersID', '$ingredientsID', '$pizzaID', '$sizeID')";
 
         return mysqli_query($this->db, $query);
     }
 
-    public function getAllProducts() {
-        $query = "SELECT pp.productID, pc.category, pb.brand, pt.type, pp.productName
-                  FROM petProduct pp
-                  INNER JOIN productCategory pc ON pp.categoryID = pc.categoryID
-                  INNER JOIN productBrand pb ON pp.brandID = pb.brandID
-                  INNER JOIN productType pt ON pp.typeID = pt.typeID
-                  ORDER BY pp.productName";
+    public function getAllPizza() {
+        $query = "SELECT pp.pizzaID, po.orders, pi.ingredients, ps.size,
+                  FROM pizzaID pp
+                  INNER JOIN pizzaOrders po ON po.ordersID = po.ordersID
+                  INNER JOIN pizzaIngredients pi ON pi.ingredientsID = pi.ingredientsID
+                  INNER JOIN pizzaSize ps ON ps.sizeID = ps.sizeID
+                  ORDER BY pp.pizzaID";
 
         $result = mysqli_query($this->db, $query);
 
@@ -28,71 +28,71 @@ class ProductModel {
             die('Query failed: ' . mysqli_error($this->db));
         }
 
-        $products = [];
+        $pizza = [];
         while ($row = mysqli_fetch_assoc($result)) {
-            $products[] = $row;
+            $pizza[] = $row;
         }
 
-        return $products;
+        return $pizza;
     }
 
-    public function deleteProduct($productID) {
-        $query = "DELETE FROM petProduct WHERE productID = $productID";
+    public function deletePizza($productID) {
+        $query = "DELETE FROM pizza WHERE pizzaID = $pizzaID";
         return mysqli_query($this->db, $query);
     }
 
-    public function getAllCategories() {
-        $query = "SELECT * FROM productCategory";
+    public function getAllOrders() {
+        $query = "SELECT * FROM pizzaOrders";
         $result = mysqli_query($this->db, $query);
 
         if (!$result) {
             die('Query failed: ' . mysqli_error($this->db));
         }
 
-        $categories = [];
+        $orders = [];
         while ($row = mysqli_fetch_assoc($result)) {
-            $categories[] = $row;
+            $orders[] = $row;
         }
 
-        return $categories;
+        return $orders;
     }
 
-    public function getAllBrands() {
-        $query = "SELECT * FROM productBrand";
+    public function getAllIngredients() {
+        $query = "SELECT * FROM pizzaIngredients";
         $result = mysqli_query($this->db, $query);
 
         if (!$result) {
             die('Query failed: ' . mysqli_error($this->db));
         }
 
-        $brands = [];
+        $ingredients = [];
         while ($row = mysqli_fetch_assoc($result)) {
-            $brands[] = $row;
+            $ingredients[] = $row;
         }
 
-        return $brands;
+        return $ingredients;
     }
 
-    public function getAllTypes() {
-        $query = "SELECT * FROM productType";
+    public function getAllSizes() {
+        $query = "SELECT * FROM pizzasize";
         $result = mysqli_query($this->db, $query);
 
         if (!$result) {
             die('Query failed: ' . mysqli_error($this->db));
         }
 
-        $types = [];
+        $sizes = [];
         while ($row = mysqli_fetch_assoc($result)) {
-            $types[] = $row;
+            $sizes[] = $row;
         }
 
-        return $types;
+        return $sizes;
     }
 
-    public function getProductByName($productName) {
-        $productName = mysqli_real_escape_string($this->db, $productName);
+    public function getPizzaByName($pizzaName) {
+        $pizzaName = mysqli_real_escape_string($this->db, $pizzaName);
 
-        $query = "SELECT * FROM petProduct WHERE productName = '$productName'";
+        $query = "SELECT * FROM pizza WHERE pizza = '$pizzaName'";
         $result = mysqli_query($this->db, $query);
 
         if (!$result) {
